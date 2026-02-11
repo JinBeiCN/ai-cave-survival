@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏔️ AI山洞生存模拟器</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 顶部状态栏 -->
+        <header id="header">
+            <div class="header-left">
+                <h1>🏔️ AI山洞生存模拟器</h1>
+                <div class="status-info">
+                    <span id="day-display">第1天</span>
+                    <span id="tick-display">第0小时</span>
+                    <span id="alive-display">存活: 0</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button onclick="control('pause')" class="btn btn-warn">⏸ 暂停</button>
+                <button onclick="control('resume')" class="btn btn-ok">▶ 继续</button>
+                <button onclick="control('speed_up')" class="btn">⏩ 加速</button>
+                <button onclick="control('slow_down')" class="btn">⏪ 减速</button>
+                <span id="speed-display" class="speed-tag">间隔: 10s</span>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <!-- 左侧: AI状态面板 -->
+            <aside id="agent-panel">
+                <h2>🤖 AI状态</h2>
+                <div id="agent-list"></div>
+
+                <h2 style="margin-top:16px;">📋 事件日志</h2>
+                <div id="event-log"></div>
+            </aside>
+
+            <!-- 中间: 聊天室列表 -->
+            <nav id="room-panel">
+                <h2>💬 聊天室</h2>
+                <div class="room-section">
+                    <h3>🔓 公开聊天室</h3>
+                    <div id="public-rooms"></div>
+                </div>
+                <div class="room-section">
+                    <h3>🔒 AI私密聊天 <span class="spy-tag">👁 偷看中</span></h3>
+                    <div id="private-rooms"></div>
+                </div>
+            </nav>
+
+            <!-- 右侧: 聊天内容 -->
+            <main id="chat-panel">
+                <div id="chat-header">
+                    <h2 id="chat-room-name">选择一个聊天室</h2>
+                    <span id="chat-room-info"></span>
+                </div>
+                <div id="chat-messages"></div>
+                <div id="chat-input-area" style="display:none;">
+                    <input type="text" id="chat-input" placeholder="输入消息..."
+                           onkeydown="if(event.key==='Enter')sendMessage()">
+                    <button onclick="sendMessage()" class="btn btn-ok">发送</button>
+                </div>
+                <div id="chat-readonly-notice" style="display:none;">
+                    <span>👁 你正在偷看AI的私密聊天，他们不知道你在这里</span>
+                </div>
+            </main>
+        </div>
+
+        <!-- AI详情弹窗 -->
+        <div id="agent-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-agent-name"></h2>
+                <div id="modal-agent-details"></div>
+                <h3>🧠 内心记忆 <span class="spy-tag">👁 偷看</span></h3>
+                <div id="modal-agent-memory"></div>
+                <h3>💭 人际关系</h3>
+                <div id="modal-agent-relations"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

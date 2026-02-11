@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.env
+.venv
+env/
+venv/
+
+# IDE与系统文件
+.idea/
+.vscode/
+*.log
+.DS_Store
